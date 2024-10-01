@@ -16,21 +16,22 @@ class ContactAdapter(context: Context, private val contactList: MutableList<Cont
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val contact = contactList[position]
-        var tcb: TileContactBinding?
+        val tcb: TileContactBinding?
 
         var contactTileView = convertView
         if(contactTileView == null) {
             tcb = TileContactBinding.inflate(context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater,parent,false)
             contactTileView = tcb.root
-            val tileContactHolder = TileContactHolder(tcb.nameTv, tcb.emailTv)
+            val tileContactHolder = TileContactHolder(tcb.nameTv, tcb.emailTv, tcb.phoneTv)
             contactTileView.tag = tileContactHolder
         }
         val holder = contactTileView.tag as TileContactHolder
         holder.nameTv.text = contact.name
         holder.emailTv.text = contact.email
+        holder.phoneTv.text = contact.phone
 
         return contactTileView
     }
 
-    private data class TileContactHolder(val nameTv: TextView, val emailTv: TextView)
+    private data class TileContactHolder(val nameTv: TextView, val emailTv: TextView, val phoneTv: TextView)
 }
